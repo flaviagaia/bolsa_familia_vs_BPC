@@ -130,6 +130,8 @@ O painel em Streamlit foi pensado para uso exploratório por analistas e gestão
 - composição municipal entre Bolsa Família e BPC;
 - judicialização e priorização gerencial.
 
+![Dashboard do projeto](assets/streamlit_dashboard.jpg)
+
 ## Bibliotecas e frameworks
 
 ### `pandas`
@@ -141,7 +143,7 @@ Foi usado como núcleo do pipeline analítico:
 - pivoteamento dos indicadores do Bolsa Família;
 - merge entre programas;
 - criação dos indicadores finais;
-- export em `parquet`.
+- export em `CSV`.
 
 Escolha:
 
@@ -281,3 +283,5 @@ The final dataset is a municipality-level analytical layer. Each row represents 
 - territorial indicators for program composition
 - rule-based prioritization for managerial review
 - `Streamlit` and `Plotly` for the dashboard
+
+![Project dashboard](assets/streamlit_dashboard.jpg)

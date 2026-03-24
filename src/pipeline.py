@@ -168,6 +168,6 @@ def run_pipeline() -> dict[str, object]:
     PROCESSED_DIR.mkdir(parents=True, exist_ok=True)
     comparison_df = build_comparison_dataset()
     summary = build_summary_dict(comparison_df)
-    comparison_df.to_parquet(COMPARISON_PATH, index=False)
+    comparison_df.to_csv(COMPARISON_PATH, index=False)
     SUMMARY_PATH.write_text(json.dumps(summary, indent=2, ensure_ascii=False))
     return summary

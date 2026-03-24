@@ -47,14 +47,14 @@ def load_data() -> tuple[dict[str, object], pd.DataFrame]:
         run_pipeline()
     try:
         summary = json.loads(SUMMARY_PATH.read_text())
-        comparison_df = pd.read_parquet(COMPARISON_PATH)
+        comparison_df = pd.read_csv(COMPARISON_PATH)
     except (FileNotFoundError, JSONDecodeError, ValueError, OSError):
         summary = run_pipeline()
-        comparison_df = pd.read_parquet(COMPARISON_PATH)
+        comparison_df = pd.read_csv(COMPARISON_PATH)
 
     if not REQUIRED_COLUMNS.issubset(comparison_df.columns):
         summary = run_pipeline()
-        comparison_df = pd.read_parquet(COMPARISON_PATH)
+        comparison_df = pd.read_csv(COMPARISON_PATH)
 
     return summary, comparison_df
 
