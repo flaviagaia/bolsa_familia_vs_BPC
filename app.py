@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 import json
+from json import JSONDecodeError
 
 import pandas as pd
 import plotly.express as px
@@ -27,11 +28,34 @@ st.markdown(
 )
 
 
+REQUIRED_COLUMNS = {
+    "municipio",
+    "ano",
+    "valor_bolsa_familia",
+    "valor_bpc",
+    "valor_total_transferencias",
+    "participacao_bolsa_pct",
+    "participacao_bpc_pct",
+    "taxa_judicializacao_bpc_pct",
+    "indice_pressao_assistencial",
+    "alerta_prioritario",
+}
+
+
 def load_data() -> tuple[dict[str, object], pd.DataFrame]:
     if not SUMMARY_PATH.exists() or not COMPARISON_PATH.exists():
         run_pipeline()
-    summary = json.loads(SUMMARY_PATH.read_text())
-    comparison_df = pd.read_parquet(COMPARISON_PATH)
+    try:
+        summary = json.loads(SUMMARY_PATH.read_text())
+        comparison_df = pd.read_parquet(COMPARISON_PATH)
+    except (FileNotFoundError, JSONDecodeError, ValueError, OSError):
+        summary = run_pipeline()
+        comparison_df = pd.read_parquet(COMPARISON_PATH)
+
+    if not REQUIRED_COLUMNS.issubset(comparison_df.columns):
+        summary = run_pipeline()
+        comparison_df = pd.read_parquet(COMPARISON_PATH)
+
     return summary, comparison_df
 
 

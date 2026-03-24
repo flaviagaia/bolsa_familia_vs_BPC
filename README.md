@@ -78,7 +78,8 @@ Como os downloads transacionais automatizados do BPC não estavam disponíveis n
 ## Como executar
 
 ```bash
-cd "/Users/flaviagaia/Documents/CV_FLAVIA_CODEX/-bolsa_fam-lia_vs_BPC"
+git clone https://github.com/flaviagaia/bolsa_familia_vs_BPC.git
+cd bolsa_familia_vs_BPC
 python3 -m venv .venv
 source .venv/bin/activate
 pip install -r requirements.txt
@@ -103,6 +104,7 @@ This project compares Bolsa Família and BPC at the municipal level, focusing on
 
 - real Bolsa Família municipal data for Alagoas (`2023`)
 - synthetic but schema-aligned BPC annual data for the same municipalities and year
+- the dashboard automatically regenerates processed files if they are missing or corrupted
 
 ### Techniques and tools
 
